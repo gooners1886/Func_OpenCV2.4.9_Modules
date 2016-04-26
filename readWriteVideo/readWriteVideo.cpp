@@ -8,6 +8,15 @@ using namespace std;
 using namespace cv;  
 
 
+
+// 总结：
+/*
+视频写入失败的原因：
+1. frame和写入视频size大小不匹配
+2. 写入视频对应的fcc设置错误
+*/
+
+
 int main()  
 {  
 	//打开视频文件：其实就是建立一个VideoCapture结构  
