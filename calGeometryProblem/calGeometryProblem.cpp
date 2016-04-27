@@ -12,9 +12,9 @@ using namespace cv;
 // 算式：
 //  (x-x1)/(y-y1) = (x1-x2)/(y1-y2)   --- 方程1
 //  (x-x3)/(y-y3) = (x3-x4)/(y3-y4)   --- 方程2
-Point2f calIntersectionTwoLinesByFourPts( Point2f p1, Point2f p2, Point2f p3, Point2f p4 )
+cv::Point2f calIntersectionTwoLinesByFourPts( cv::Point2f p1, cv::Point2f p2, cv::Point2f p3, cv::Point2f p4 )
 {
-	Point2f p;
+	cv::Point2f p;
 	float fFenMu = (p1.x-p2.x)*(p3.y-p4.y)-(p1.y-p2.y)*(p3.x-p4.x);
 
 	if ( fFenMu == 0 )
@@ -39,9 +39,9 @@ Point2f calIntersectionTwoLinesByFourPts( Point2f p1, Point2f p2, Point2f p3, Po
 // 算式：
 //  (x-x1)/(y-y1) = (x1-x2)/(y1-y2)   --- 方程1
 //  (x-x5)/(y-y5) = (x3-x4)/(y3-y4)   --- 方程2
-Point2f calParaIntersection( Point2f p1, Point2f p2, Point2f p3, Point2f p4, Point2f p5 )
+cv::Point2f calParaIntersection( cv::Point2f p1, cv::Point2f p2, cv::Point2f p3, cv::Point2f p4, cv::Point2f p5 )
 {
-	Point2f p;
+	cv::Point2f p;
 	float fFenMu = (p1.x-p2.x)*(p3.y-p4.y)-(p1.y-p2.y)*(p3.x-p4.x);
 
 	if ( fFenMu == 0 )
@@ -65,19 +65,19 @@ Point2f calParaIntersection( Point2f p1, Point2f p2, Point2f p3, Point2f p4, Poi
 int main()  
 {  
 	// 显示 两直线求交点
-	int iShowIntersectionSwitch = 0;
+	int iShowIntersectionSwitch = 1;
 	if ( iShowIntersectionSwitch )
 	{
 		// *************************  两条直线求交点  *****************************
 		cv::Mat mat(500, 500, CV_8UC3, cvScalar(250,190,190));
 		// line 1
-		Point2f p1(100, 200);
-		Point2f p2(220, 300);
+		cv::Point2f p1(100, 200);
+		cv::Point2f p2(220, 300);
 		// line 2
-		Point2f p3(300, 50);
-		Point2f p4(90, 400);
+		cv::Point2f p3(300, 50);
+		cv::Point2f p4(90, 400);
 
-		Point2f p = calIntersectionTwoLinesByFourPts(p1, p2, p3, p4);
+		cv::Point2f p = calIntersectionTwoLinesByFourPts(p1, p2, p3, p4);
 
 		// line 1: red
 		cv::circle( mat, p1, 2, cvScalar(0,0,255), 2 );
@@ -91,10 +91,10 @@ int main()
 		cv::circle( mat, p, 2, cvScalar(0,255,255), 2 );
 
 
-		cv::namedWindow("frame");  
-		cv::imshow("frame", mat);
+		cv::namedWindow("两条直线求交点");  
+		cv::imshow("两条直线求交点", mat);
 		cv::waitKey(0);  
-		cv::destroyWindow("frame");
+		cv::destroyWindow("两条直线求交点");
 	}
 
 	// 显示 平行相交  求交点
@@ -104,16 +104,16 @@ int main()
 		// *************************  平行相交  *****************************
 		cv::Mat mat2(500, 500, CV_8UC3, cvScalar(250,190,190));
 		// line 1
-		Point2f p1(100, 200);
-		Point2f p2(450, 450);
+		cv::Point2f p1(100, 200);
+		cv::Point2f p2(450, 450);
 		// line 2
-		Point2f p3(300, 50);
-		Point2f p4(90, 400);
+		cv::Point2f p3(300, 50);
+		cv::Point2f p4(90, 400);
 
-		Point2f p5(350, 150);
+		cv::Point2f p5(350, 150);
 
 
-		Point2f p = calParaIntersection(p1, p2, p3, p4, p5);
+		cv::Point2f p = calParaIntersection(p1, p2, p3, p4, p5);
 
 		// line 1: red
 		cv::circle( mat2, p1, 2, cvScalar(0,0,255), 2 );
@@ -131,10 +131,10 @@ int main()
 
 
 
-		cv::namedWindow("mat2");  
-		cv::imshow("mat2", mat2);
+		cv::namedWindow("平行相交");  
+		cv::imshow("平行相交", mat2);
 		cv::waitKey(0);  
-		cv::destroyWindow("mat2");
+		cv::destroyWindow("平行相交");
 	}
 
 	return 0;  
