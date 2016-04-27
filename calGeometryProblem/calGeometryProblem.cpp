@@ -9,6 +9,9 @@ using namespace cv;
 
 // (已知4个点)两条直线求交点
 // p1 p2 为第一条直线上的点， p3 p4为第2条直线上的点
+// 算式：
+//  (x-x1)/(y-y1) = (x1-x2)/(y1-y2)   --- 方程1
+//  (x-x3)/(y-y3) = (x3-x4)/(y3-y4)   --- 方程2
 Point2f calIntersectionTwoLinesByFourPts( Point2f p1, Point2f p2, Point2f p3, Point2f p4 )
 {
 	Point2f p;
@@ -34,7 +37,8 @@ Point2f calIntersectionTwoLinesByFourPts( Point2f p1, Point2f p2, Point2f p3, Po
 // 已知： p1 p2是直线1   p3 p4是直线2   点p5
 // 求点p, 在直线1上，且pp5连线平行于p3p4连线
 // 算式：
-// 
+//  (x-x1)/(y-y1) = (x1-x2)/(y1-y2)   --- 方程1
+//  (x-x5)/(y-y5) = (x3-x4)/(y3-y4)   --- 方程2
 Point2f calParaIntersection( Point2f p1, Point2f p2, Point2f p3, Point2f p4, Point2f p5 )
 {
 	Point2f p;
