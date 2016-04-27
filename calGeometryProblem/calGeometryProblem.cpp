@@ -97,7 +97,7 @@ int main()
 		cv::destroyWindow("frame");
 	}
 
-	// 显示 平行直线求交点
+	// 显示 平行相交  求交点
 	int iShowParaIntersectionSwitch = 1;
 	if ( iShowParaIntersectionSwitch )
 	{
