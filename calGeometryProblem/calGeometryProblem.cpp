@@ -3,21 +3,35 @@
 #include <opencv2/highgui/highgui.hpp>  
 #include <opencv2/imgproc/imgproc.hpp>  
 #include <iostream>  
+#include <math.h>
+#include <float.h>
 
 using namespace std;  
 using namespace cv;  
 
-// (ÒÑÖª4¸öµã)Á½ÌõÖ±ÏßÇó½»µã
-// p1 p2 ÎªµÚÒ»ÌõÖ±ÏßÉÏµÄµã£¬ p3 p4ÎªµÚ2ÌõÖ±ÏßÉÏµÄµã
-// ËãÊ½£º
-//  (x-x1)/(y-y1) = (x1-x2)/(y1-y2)   --- ·½³Ì1
-//  (x-x3)/(y-y3) = (x3-x4)/(y3-y4)   --- ·½³Ì2
+bool myFloatEqualZero( float f )
+{
+	if ( fabs(f)<FLT_EPSILON )
+	{
+		return true;
+	}
+
+	return false;
+}
+
+
+
+// (å·²çŸ¥4ä¸ªç‚¹)ä¸¤æ¡ç›´çº¿æ±‚äº¤ç‚¹
+// p1 p2 ä¸ºç¬¬ä¸€æ¡ç›´çº¿ä¸Šçš„ç‚¹ï¼Œ p3 p4ä¸ºç¬¬2æ¡ç›´çº¿ä¸Šçš„ç‚¹
+// ç®—å¼ï¼š
+//  (x-x1)/(y-y1) = (x1-x2)/(y1-y2)   --- æ–¹ç¨‹1
+//  (x-x3)/(y-y3) = (x3-x4)/(y3-y4)   --- æ–¹ç¨‹2
 cv::Point2f calIntersectionTwoLinesByFourPts( cv::Point2f p1, cv::Point2f p2, cv::Point2f p3, cv::Point2f p4 )
 {
 	cv::Point2f p;
 	float fFenMu = (p1.x-p2.x)*(p3.y-p4.y)-(p1.y-p2.y)*(p3.x-p4.x);
 
-	if ( fFenMu == 0 )
+	if ( myFloatEqualZero(fFenMu) )
 	{
 		std::cout<<"Two Lines are parallel"<<std::endl;
 		std::cout<<"p1: "<<p1<<" p2:"<<p2<<" p3:"<<p3<<" p4"<<p4<<std::endl;
@@ -33,18 +47,18 @@ cv::Point2f calIntersectionTwoLinesByFourPts( cv::Point2f p1, cv::Point2f p2, cv
 	return p;
 }
 
-// Æ½ĞĞÏà½»
-// ÒÑÖª£º p1 p2ÊÇÖ±Ïß1   p3 p4ÊÇÖ±Ïß2   µãp5
-// Çóµãp, ÔÚÖ±Ïß1ÉÏ£¬ÇÒpp5Á¬ÏßÆ½ĞĞÓÚp3p4Á¬Ïß
-// ËãÊ½£º
-//  (x-x1)/(y-y1) = (x1-x2)/(y1-y2)   --- ·½³Ì1
-//  (x-x5)/(y-y5) = (x3-x4)/(y3-y4)   --- ·½³Ì2
+// å¹³è¡Œç›¸äº¤
+// å·²çŸ¥ï¼š p1 p2æ˜¯ç›´çº¿1   p3 p4æ˜¯ç›´çº¿2   ç‚¹p5
+// æ±‚ç‚¹p, åœ¨ç›´çº¿1ä¸Šï¼Œä¸”pp5è¿çº¿å¹³è¡Œäºp3p4è¿çº¿
+// ç®—å¼ï¼š
+//  (x-x1)/(y-y1) = (x1-x2)/(y1-y2)   --- æ–¹ç¨‹1
+//  (x-x5)/(y-y5) = (x3-x4)/(y3-y4)   --- æ–¹ç¨‹2
 cv::Point2f calParaIntersection( cv::Point2f p1, cv::Point2f p2, cv::Point2f p3, cv::Point2f p4, cv::Point2f p5 )
 {
 	cv::Point2f p;
 	float fFenMu = (p1.x-p2.x)*(p3.y-p4.y)-(p1.y-p2.y)*(p3.x-p4.x);
 
-	if ( fFenMu == 0 )
+	if ( myFloatEqualZero(fFenMu) )
 	{
 		std::cout<<"Two Lines are parallel"<<std::endl;
 		std::cout<<"p1: "<<p1<<" p2:"<<p2<<" p3:"<<p3<<" p4"<<p4<<std::endl;
@@ -64,11 +78,11 @@ cv::Point2f calParaIntersection( cv::Point2f p1, cv::Point2f p2, cv::Point2f p3,
 
 int main()  
 {  
-	// ÏÔÊ¾ Á½Ö±ÏßÇó½»µã
+	// æ˜¾ç¤º ä¸¤ç›´çº¿æ±‚äº¤ç‚¹
 	int iShowIntersectionSwitch = 1;
 	if ( iShowIntersectionSwitch )
 	{
-		// *************************  Á½ÌõÖ±ÏßÇó½»µã  *****************************
+		// *************************  ä¸¤æ¡ç›´çº¿æ±‚äº¤ç‚¹  *****************************
 		cv::Mat mat(500, 500, CV_8UC3, cvScalar(250,190,190));
 		// line 1
 		cv::Point2f p1(100, 200);
@@ -91,17 +105,17 @@ int main()
 		cv::circle( mat, p, 2, cvScalar(0,255,255), 2 );
 
 
-		cv::namedWindow("Á½ÌõÖ±ÏßÇó½»µã");  
-		cv::imshow("Á½ÌõÖ±ÏßÇó½»µã", mat);
+		cv::namedWindow("ä¸¤æ¡ç›´çº¿æ±‚äº¤ç‚¹");  
+		cv::imshow("ä¸¤æ¡ç›´çº¿æ±‚äº¤ç‚¹", mat);
 		cv::waitKey(0);  
-		cv::destroyWindow("Á½ÌõÖ±ÏßÇó½»µã");
+		cv::destroyWindow("ä¸¤æ¡ç›´çº¿æ±‚äº¤ç‚¹");
 	}
 
-	// ÏÔÊ¾ Æ½ĞĞÏà½»  Çó½»µã
+	// æ˜¾ç¤º å¹³è¡Œç›¸äº¤  æ±‚äº¤ç‚¹
 	int iShowParaIntersectionSwitch = 1;
 	if ( iShowParaIntersectionSwitch )
 	{
-		// *************************  Æ½ĞĞÏà½»  *****************************
+		// *************************  å¹³è¡Œç›¸äº¤  *****************************
 		cv::Mat mat2(500, 500, CV_8UC3, cvScalar(250,190,190));
 		// line 1
 		cv::Point2f p1(100, 200);
@@ -131,10 +145,10 @@ int main()
 
 
 
-		cv::namedWindow("Æ½ĞĞÏà½»");  
-		cv::imshow("Æ½ĞĞÏà½»", mat2);
+		cv::namedWindow("å¹³è¡Œç›¸äº¤");  
+		cv::imshow("å¹³è¡Œç›¸äº¤", mat2);
 		cv::waitKey(0);  
-		cv::destroyWindow("Æ½ĞĞÏà½»");
+		cv::destroyWindow("å¹³è¡Œç›¸äº¤");
 	}
 
 	return 0;  
