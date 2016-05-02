@@ -11,9 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{F9F2DA17-FC11-421C-B838-3B60668A56E0}</ProjectGuid>
+    <ProjectGuid>{1B5ECC49-98EE-44C9-9DEB-133786BFDB27}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>calGeometryProblem</RootNamespace>
+    <RootNamespace>calGeometryProblem1</RootNamespace>
+    <ProjectName>calGeometryProblem1</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -34,11 +35,11 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\Opencv_Props_win64_open3.0.0\VS2012_OpenCV249_x86_Debug1.props" />
+    <Import Project="..\OpenCV_Props_Current_Project\VS2012_OpenCV249_x86_Debug1.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\Opencv_Props_win64_open3.0.0\VS2012_OpenCV249_x86_Release1.props" />
+    <Import Project="..\OpenCV_Props_Current_Project\VS2012_OpenCV249_x86_Release1.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
