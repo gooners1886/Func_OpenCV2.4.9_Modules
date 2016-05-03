@@ -2,6 +2,10 @@
 #include <iostream>
 
 
+//  经验： 
+// 1. 程序的cout 大致浪费 1ms左右
+// 2. 程序的入栈出栈 也会消耗ms级别的时间
+
 double begin_time_opencv[10];
 double end_time_opencv[10];
 void getBeginTick_OpenCV( int idx )
@@ -25,9 +29,10 @@ int main ()
 	getBeginTick_OpenCV( 0 );
 
 	int iSum = 0;
-	for ( int i = 0; i < 100; i++ )
+	for ( int i = 0; i < 10000; i++ )
 	{
 		iSum += i;
+		std::cout<<"iiiiiiiiiiiiiiiiiiiiiiiiiiiiii="<<i<<std::endl;
 	}
 	std::cout<<"iSum="<<iSum<<std::endl;
 
