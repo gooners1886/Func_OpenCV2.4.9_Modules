@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "faceDetect_OpenCV_Adaboost"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "calGeometryProblem1", "calGeometryProblem1\calGeometryProblem1.vcxproj", "{1B5ECC49-98EE-44C9-9DEB-133786BFDB27}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "getTimeTick_OpenCV", "getTimeTick_OpenCV\getTimeTick_OpenCV.vcxproj", "{CDB7BEF8-2FC0-4836-B042-9831EF9DBCF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -67,6 +69,17 @@ Global
 		{1B5ECC49-98EE-44C9-9DEB-133786BFDB27}.Release|Win32.Build.0 = Release|Win32
 		{1B5ECC49-98EE-44C9-9DEB-133786BFDB27}.Release|x64.ActiveCfg = Release|x64
 		{1B5ECC49-98EE-44C9-9DEB-133786BFDB27}.Release|x64.Build.0 = Release|x64
+		{CDB7BEF8-2FC0-4836-B042-9831EF9DBCF1}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{CDB7BEF8-2FC0-4836-B042-9831EF9DBCF1}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{CDB7BEF8-2FC0-4836-B042-9831EF9DBCF1}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CDB7BEF8-2FC0-4836-B042-9831EF9DBCF1}.Debug|Win32.Build.0 = Debug|Win32
+		{CDB7BEF8-2FC0-4836-B042-9831EF9DBCF1}.Debug|x64.ActiveCfg = Debug|Win32
+		{CDB7BEF8-2FC0-4836-B042-9831EF9DBCF1}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{CDB7BEF8-2FC0-4836-B042-9831EF9DBCF1}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{CDB7BEF8-2FC0-4836-B042-9831EF9DBCF1}.Release|Win32.ActiveCfg = Release|Win32
+		{CDB7BEF8-2FC0-4836-B042-9831EF9DBCF1}.Release|Win32.Build.0 = Release|Win32
+		{CDB7BEF8-2FC0-4836-B042-9831EF9DBCF1}.Release|x64.ActiveCfg = Release|x64
+		{CDB7BEF8-2FC0-4836-B042-9831EF9DBCF1}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
