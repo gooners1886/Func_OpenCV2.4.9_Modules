@@ -1,10 +1,13 @@
-#include <opencv2/opencv.hpp>
+ï»¿#include <opencv2/opencv.hpp>
+#include <opencv2/core/core.hpp>  
+#include <opencv2/highgui/highgui.hpp>  
+#include <opencv2/imgproc/imgproc.hpp> 
 #include <iostream>
 
 
-//  ¾­Ñé£º 
-// 1. ³ÌĞòµÄcout ´óÖÂÀË·Ñ 1ms×óÓÒ
-// 2. ³ÌĞòµÄÈëÕ»³öÕ» Ò²»áÏûºÄms¼¶±ğµÄÊ±¼ä
+//  ç»éªŒï¼š 
+// 1. ç¨‹åºçš„cout å¤§è‡´æµªè´¹ 1mså·¦å³
+// 2. ç¨‹åºçš„å…¥æ ˆå‡ºæ ˆ ä¹Ÿä¼šæ¶ˆè€—msçº§åˆ«çš„æ—¶é—´
 
 double begin_time_opencv[10];
 double end_time_opencv[10];
@@ -29,7 +32,7 @@ int main ()
 	getBeginTick_OpenCV( 0 );
 
 	int iSum = 0;
-	for ( int i = 0; i < 10000; i++ )
+	for ( int i = 0; i < 100; i++ )
 	{
 		iSum += i;
 		std::cout<<"iiiiiiiiiiiiiiiiiiiiiiiiiiiiii="<<i<<std::endl;
