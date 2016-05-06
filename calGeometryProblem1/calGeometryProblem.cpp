@@ -178,7 +178,7 @@ int main()
 		cv::destroyWindow("平行相交");
 	}
 
-	// 显示 平行相交  求交点
+	// 显示 垂直相交  求交点
 	int iShowVerticalIntersectionSwitch = 1;
 	if ( iShowVerticalIntersectionSwitch )
 	{
