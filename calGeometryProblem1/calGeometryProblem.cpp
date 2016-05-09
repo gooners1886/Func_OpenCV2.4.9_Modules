@@ -1,9 +1,15 @@
-﻿#include <opencv2/core/core.hpp>  
+﻿#define _USE_MATH_DEFINES
+#include <opencv2/core/core.hpp>  
 #include <opencv2/highgui/highgui.hpp>  
 #include <opencv2/imgproc/imgproc.hpp>  
 #include <iostream>  
 #include <math.h>
 #include <float.h>
+#include <math.h>
+
+// 引用C/C++库中的宏来表示PI的方法:  
+// 1. #define _USE_MATH_DEFINES   --- 注意，这个需要放在math.h的前面
+// 2. #include <math.h>
 
 using namespace std;  
 using namespace cv;  
@@ -101,6 +107,43 @@ cv::Point2f calVerticalIntersection( cv::Point2f p1, cv::Point2f p2, cv::Point2f
 }
 
 
+
+double calDist( cv::Point2f p1, cv::Point2f p2 )
+{
+	return sqrt( (p1.x-p2.x)*(p1.x-p2.x) + (p1.y-p2.y)*(p1.y-p2.y) );
+}
+
+// 坐标旋转
+//    对图片上任意点(x,y)，绕一个坐标点(rx0,ry0)逆时针旋转a角度后的新的坐标设为(x0, y0)，有公式：
+//    x0= (x - rx0)*cos(a) - (y - ry0)*sin(a) + rx0 ;    y0= (x - rx0)*sin(a) + (y - ry0)*cos(a) + ry0 ;
+cv::Point2f calCoordinateRotation( cv::Point2f center, cv::Point2f p, double dTheta )
+{
+	cv::Point2f pNew;
+	pNew.x = (p.x-center.x)*cos(dTheta*M_PI/180) - (p.y-center.y)*sin(dTheta*M_PI/180) + center.x;
+	pNew.y = (p.x-center.x)*sin(dTheta*M_PI/180) + (p.y-center.y)*cos(dTheta*M_PI/180) + center.y;
+
+	return pNew;
+}
+
+
+// 通过坐标旋转，画半圆上的点
+void calPtsInSemicircle( cv::Point2f p1, cv::Point2f p2, int iNum, std::vector<cv::Point2f>& vPtsInSemicircle )
+{
+	double dDeltaAngle = 180.0/iNum;
+	cv::Point2f mid( (p1.x+p2.x)/2.0, (p1.y+p2.y)/2.0 );
+	for ( double dTheta = dDeltaAngle; dTheta < 180.0; dTheta+=dDeltaAngle)
+	{
+		cv::Point2f p;
+		//p.x = cos(dTheta*M_PI/180)*dRadius + mid.x;
+		//p.y = sin(dTheta*M_PI/180)*dRadius + mid.y;
+
+		p = calCoordinateRotation(mid, p2, dTheta);
+
+		vPtsInSemicircle.push_back(p);
+	}
+
+	return;
+}
 
 
 int main()  
@@ -215,6 +258,43 @@ int main()
 		cv::imshow("垂直相交", mat);
 		cv::waitKey(0);  
 		cv::destroyWindow("垂直相交");
+	}
+
+
+
+	int iShowSemiCircleSwitch = 1;
+	if ( iShowSemiCircleSwitch )
+	{
+		// *************************  平行相交  *****************************
+		cv::Mat mat(500, 500, CV_8UC3, cvScalar(250,190,190));
+		// line 1
+		cv::Point2f p1(100, 100);
+		cv::Point2f p2(300, 300);
+
+		cv::Point2f mid( (p1.x+p2.x)/2.0, (p1.y+p2.y)/2.0 );
+
+
+		cv::circle( mat, p1, 2, cvScalar(0,0,255), 2 );
+		cv::circle( mat, p2, 2, cvScalar(0,0,255), 2 );
+		cv::circle( mat, mid, 2, cvScalar(0,0,255), 2 );
+		cv::circle( mat, cv::Point2f( (p1.x+p2.x)/2.0, (p1.y+p2.y)/2.0 ), calDist(p1, mid), cvScalar(0,0,255), 2 );
+
+		std::vector<cv::Point2f> vPtsInSemicircle;
+		calPtsInSemicircle( p1, p2, 9, vPtsInSemicircle );
+
+		for ( int iPtIdx = 0; iPtIdx < vPtsInSemicircle.size(); iPtIdx++ )
+		{
+			cv::circle( mat, vPtsInSemicircle[iPtIdx], 4, cvScalar(255,0,0), 2 );
+		}
+
+		
+		
+
+
+		cv::namedWindow("通过坐标旋转画半圆上的点");  
+		cv::imshow("通过坐标旋转画半圆上的点", mat);
+		cv::waitKey(0);  
+		cv::destroyWindow("通过坐标旋转画半圆上的点");
 	}
 
 	return 0;  
