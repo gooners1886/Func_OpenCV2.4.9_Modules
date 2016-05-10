@@ -127,18 +127,18 @@ cv::Point2f calCoordinateRotation( cv::Point2f center, cv::Point2f p, double dTh
 
 
 // 通过坐标旋转，画半圆上的点
-void calPtsInSemicircle( cv::Point2f p1, cv::Point2f p2, int iNum, std::vector<cv::Point2f>& vPtsInSemicircle )
+// 给定两个点p1, p2, 以p1p2为直径存在一个半圆，画出该半圆上iNum个平均分点，iNum不包括p1和p2两个点
+void calPtsInSemicircle( cv::Point2f p1, cv::Point2f p2, int iNumPts, std::vector<cv::Point2f>& vPtsInSemicircle )
 {
-	double dDeltaAngle = 180.0/iNum;
+	double dDeltaAngle = 180.0/(iNumPts+1);
 	cv::Point2f mid( (p1.x+p2.x)/2.0, (p1.y+p2.y)/2.0 );
-	for ( double dTheta = dDeltaAngle; dTheta < 180.0; dTheta+=dDeltaAngle)
+	double dTheta = 0.0;
+
+	for ( int iPtIdx = 0; iPtIdx < iNumPts; iPtIdx++ )
 	{
 		cv::Point2f p;
-		//p.x = cos(dTheta*M_PI/180)*dRadius + mid.x;
-		//p.y = sin(dTheta*M_PI/180)*dRadius + mid.y;
-
+		dTheta += dDeltaAngle;
 		p = calCoordinateRotation(mid, p2, dTheta);
-
 		vPtsInSemicircle.push_back(p);
 	}
 
