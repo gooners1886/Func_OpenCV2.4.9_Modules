@@ -20,7 +20,7 @@ using namespace cv;
 int main()  
 {  
 	//打开视频文件：其实就是建立一个VideoCapture结构  
-	std::string strSrcVideoPatch = "../SourceVideoFolder/zhubo.mp4";
+	std::string strSrcVideoPatch = "../SourceVideoFolder/《傲慢与偏见》 东植热舞天台浪漫亲吻[高清] 00_01_34-00_01_59.mp4";
 	VideoCapture capture( strSrcVideoPatch.c_str() ); 
 
 	//检测是否正常打开:成功打开时，isOpened返回ture  
@@ -35,12 +35,12 @@ int main()
 	cout<<"整个视频共"<<totalFrameNumber<<"帧"<<endl;  
 
 	//设置开始帧()  
-	long frameToStart = 0;  
+	long frameToStart = 620;  
 	capture.set( CV_CAP_PROP_POS_FRAMES,frameToStart);  
 	cout<<"从第"<<frameToStart<<"帧开始读"<<endl;  
 
 	//设置结束帧  
-	int frameToStop = 20;  
+	int frameToStop = totalFrameNumber-1;  
 
 	if(frameToStop < frameToStart)  
 	{  
@@ -85,7 +85,22 @@ int main()
 	}
 
 	while(!stop)  
-	{  
+	{
+		//waitKey(int delay=0)当delay ≤ 0时会永远等待；当delay>0时会等待delay毫秒  
+		//当时间结束前没有按键按下时，返回值为-1；否则返回按键  
+		int c = waitKey(delay);  
+		
+		//按下ESC或者到达指定的结束帧后退出读取视频  
+		if((char) c == 27 || currentFrame >= frameToStop)
+		{  
+			stop = true;  
+		}  
+		//按下按键后会停留在当前帧，等待下一次按键  
+		if( c >= 0)  
+		{  
+			waitKey(0);  
+		}
+
 		//读取下一帧  
 		if(!capture.read(frame))  
 		{  
@@ -99,21 +114,7 @@ int main()
 		imshow("frame",frame);  
 
 		cout<<"正在读取第"<<currentFrame<<"帧"<<endl;  
-		//waitKey(int delay=0)当delay ≤ 0时会永远等待；当delay>0时会等待delay毫秒  
-		//当时间结束前没有按键按下时，返回值为-1；否则返回按键  
-
-
-		int c = waitKey(delay);  
-		//按下ESC或者到达指定的结束帧后退出读取视频  
-		if((char) c == 27 || currentFrame > frameToStop)
-		{  
-			stop = true;  
-		}  
-		//按下按键后会停留在当前帧，等待下一次按键  
-		if( c >= 0)  
-		{  
-			waitKey(0);  
-		}  
+		
 		currentFrame++;  
 
 		/** 将视频写入文件 */
