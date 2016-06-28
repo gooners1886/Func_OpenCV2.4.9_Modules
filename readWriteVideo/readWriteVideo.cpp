@@ -20,13 +20,13 @@ using namespace cv;
 int main()  
 {  
 	//打开视频文件：其实就是建立一个VideoCapture结构  
-	std::string strSrcVideoPatch = "../SourceVideoFolder/《傲慢与偏见》 东植热舞天台浪漫亲吻[高清] 00_01_34-00_01_59.mp4";
-	VideoCapture capture( strSrcVideoPatch.c_str() ); 
+	std::string strSrcVideoPath = "../SourceVideoFolder/《傲慢与偏见》 东植热舞天台浪漫亲吻[高清] 00_01_34-00_01_59.mp4";
+	VideoCapture capture( strSrcVideoPath.c_str() ); 
 
 	//检测是否正常打开:成功打开时，isOpened返回ture  
 	if(!capture.isOpened())
 	{
-		cout<<"fail to open video "<<strSrcVideoPatch<<" !"<<endl;
+		cout<<"fail to open video "<<strSrcVideoPath<<" !"<<endl;
 		return 1;
 	}
 
