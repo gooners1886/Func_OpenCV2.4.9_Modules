@@ -1,4 +1,4 @@
-
+ï»¿
 #include <opencv2/core/core.hpp>  
 #include <opencv2/highgui/highgui.hpp>  
 #include <opencv2/imgproc/imgproc.hpp>  
@@ -9,75 +9,75 @@ using namespace cv;
 
 
 
-// ×Ü½á£º
+// æ€»ç»“ï¼š
 /*
-ÊÓÆµĞ´ÈëÊ§°ÜµÄÔ­Òò£º
-1. frameºÍĞ´ÈëÊÓÆµsize´óĞ¡²»Æ¥Åä
-2. Ğ´ÈëÊÓÆµ¶ÔÓ¦µÄfccÉèÖÃ´íÎó
+è§†é¢‘å†™å…¥å¤±è´¥çš„åŸå› ï¼š
+1. frameå’Œå†™å…¥è§†é¢‘sizeå¤§å°ä¸åŒ¹é…
+2. å†™å…¥è§†é¢‘å¯¹åº”çš„fccè®¾ç½®é”™è¯¯
 */
 
 
 int main()  
 {  
-	//´ò¿ªÊÓÆµÎÄ¼ş£ºÆäÊµ¾ÍÊÇ½¨Á¢Ò»¸öVideoCapture½á¹¹  
-	std::string strSrcVideoPatch = "../SourceVideoFolder/¡¶°ÁÂıÓëÆ«¼û¡· ¶«Ö²ÈÈÎèÌìÌ¨ÀËÂşÇ×ÎÇ[¸ßÇå] 00_01_34-00_01_59.mp4";
+	//æ‰“å¼€è§†é¢‘æ–‡ä»¶ï¼šå…¶å®å°±æ˜¯å»ºç«‹ä¸€ä¸ªVideoCaptureç»“æ„  
+	std::string strSrcVideoPatch = "../SourceVideoFolder/ã€Šå‚²æ…¢ä¸åè§ã€‹ ä¸œæ¤çƒ­èˆå¤©å°æµªæ¼«äº²å»[é«˜æ¸…] 00_01_34-00_01_59.mp4";
 	VideoCapture capture( strSrcVideoPatch.c_str() ); 
 
-	//¼ì²âÊÇ·ñÕı³£´ò¿ª:³É¹¦´ò¿ªÊ±£¬isOpened·µ»Øture  
+	//æ£€æµ‹æ˜¯å¦æ­£å¸¸æ‰“å¼€:æˆåŠŸæ‰“å¼€æ—¶ï¼ŒisOpenedè¿”å›ture  
 	if(!capture.isOpened())
 	{
 		cout<<"fail to open video "<<strSrcVideoPatch<<" !"<<endl;
 		return 1;
 	}
 
-	//»ñÈ¡Õû¸öÖ¡Êı  
+	//è·å–æ•´ä¸ªå¸§æ•°  
 	long totalFrameNumber = capture.get(CV_CAP_PROP_FRAME_COUNT);  
-	cout<<"Õû¸öÊÓÆµ¹²"<<totalFrameNumber<<"Ö¡"<<endl;  
+	cout<<"æ•´ä¸ªè§†é¢‘å…±"<<totalFrameNumber<<"å¸§"<<endl;  
 
-	//ÉèÖÃ¿ªÊ¼Ö¡()  
+	//è®¾ç½®å¼€å§‹å¸§()  
 	long frameToStart = 620;  
 	capture.set( CV_CAP_PROP_POS_FRAMES,frameToStart);  
-	cout<<"´ÓµÚ"<<frameToStart<<"Ö¡¿ªÊ¼¶Á"<<endl;  
+	cout<<"ä»ç¬¬"<<frameToStart<<"å¸§å¼€å§‹è¯»"<<endl;  
 
-	//ÉèÖÃ½áÊøÖ¡  
+	//è®¾ç½®ç»“æŸå¸§  
 	int frameToStop = totalFrameNumber-1;  
 
 	if(frameToStop < frameToStart)  
 	{  
-		cout<<"½áÊøÖ¡Ğ¡ÓÚ¿ªÊ¼Ö¡£¬³ÌĞò´íÎó£¬¼´½«ÍË³ö£¡"<<endl;  
+		cout<<"ç»“æŸå¸§å°äºå¼€å§‹å¸§ï¼Œç¨‹åºé”™è¯¯ï¼Œå³å°†é€€å‡ºï¼"<<endl;  
 		return -1;  
 	}  
 	else  
 	{  
-		cout<<"½áÊøÖ¡Îª£ºµÚ"<<frameToStop<<"Ö¡"<<endl;  
+		cout<<"ç»“æŸå¸§ä¸ºï¼šç¬¬"<<frameToStop<<"å¸§"<<endl;  
 	}  
 
-	//»ñÈ¡Ö¡ÂÊ  
+	//è·å–å¸§ç‡  
 	double rate = capture.get(CV_CAP_PROP_FPS);  
-	cout<<"Ö¡ÂÊÎª:"<<rate<<endl;  
+	cout<<"å¸§ç‡ä¸º:"<<rate<<endl;  
 
-	//¶¨ÒåÒ»¸öÓÃÀ´¿ØÖÆ¶ÁÈ¡ÊÓÆµÑ­»·½áÊøµÄ±äÁ¿  
+	//å®šä¹‰ä¸€ä¸ªç”¨æ¥æ§åˆ¶è¯»å–è§†é¢‘å¾ªç¯ç»“æŸçš„å˜é‡  
 	bool stop = false;  
-	//³ĞÔØÃ¿Ò»Ö¡µÄÍ¼Ïñ  
+	//æ‰¿è½½æ¯ä¸€å¸§çš„å›¾åƒ  
 	Mat frame;  
-	//ÏÔÊ¾Ã¿Ò»Ö¡µÄ´°¿Ú  
+	//æ˜¾ç¤ºæ¯ä¸€å¸§çš„çª—å£  
 	namedWindow("frame");  
-	//Á½Ö¡¼äµÄ¼ä¸ôÊ±¼ä:  
+	//ä¸¤å¸§é—´çš„é—´éš”æ—¶é—´:  
 	int delay = 1000/rate;  
 
-	//ÀûÓÃwhileÑ­»·¶ÁÈ¡Ö¡  
-	//currentFrameÊÇÔÚÑ­»·ÌåÖĞ¿ØÖÆ¶ÁÈ¡µ½Ö¸¶¨µÄÖ¡ºóÑ­»·½áÊøµÄ±äÁ¿  
+	//åˆ©ç”¨whileå¾ªç¯è¯»å–å¸§  
+	//currentFrameæ˜¯åœ¨å¾ªç¯ä½“ä¸­æ§åˆ¶è¯»å–åˆ°æŒ‡å®šçš„å¸§åå¾ªç¯ç»“æŸçš„å˜é‡  
 	long currentFrame = frameToStart;  
 
 
-	/** ´ò¿ªÊä³öÊÓÆµÎÄ¼ş */
+	/** æ‰“å¼€è¾“å‡ºè§†é¢‘æ–‡ä»¶ */
 	cv::VideoWriter writer;
 	int fcc = CV_FOURCC('D','I','V','3'); 
-	writer.open( "output.avi", // Êä³öÊÓÆµÎÄ¼şÃû
-		fcc,/*(int)capture.get( CV_CAP_PROP_FOURCC ), */// Ò²¿ÉÉèÎªCV_FOURCC_PROMPT£¬ÔÚÔËĞĞÊ±Ñ¡È¡
-		(double)capture.get( CV_CAP_PROP_FPS ), // ÊÓÆµÖ¡ÂÊ
-		cv::Size( (int)capture.get( CV_CAP_PROP_FRAME_WIDTH ), (int)capture.get( CV_CAP_PROP_FRAME_HEIGHT ) ), // ÊÓÆµ´óĞ¡
-		true ); // ÊÇ·ñÊä³ö²ÊÉ«ÊÓÆµ
+	writer.open( "output.avi", // è¾“å‡ºè§†é¢‘æ–‡ä»¶å
+		fcc,/*(int)capture.get( CV_CAP_PROP_FOURCC ), */// ä¹Ÿå¯è®¾ä¸ºCV_FOURCC_PROMPTï¼Œåœ¨è¿è¡Œæ—¶é€‰å–
+		(double)capture.get( CV_CAP_PROP_FPS ), // è§†é¢‘å¸§ç‡
+		cv::Size( (int)capture.get( CV_CAP_PROP_FRAME_WIDTH ), (int)capture.get( CV_CAP_PROP_FRAME_HEIGHT ) ), // è§†é¢‘å¤§å°
+		true ); // æ˜¯å¦è¾“å‡ºå½©è‰²è§†é¢‘
 
 	if ( !writer.isOpened() )
 	{
@@ -86,43 +86,44 @@ int main()
 
 	while(!stop)  
 	{
-		//waitKey(int delay=0)µ±delay ¡Ü 0Ê±»áÓÀÔ¶µÈ´ı£»µ±delay>0Ê±»áµÈ´ıdelayºÁÃë  
-		//µ±Ê±¼ä½áÊøÇ°Ã»ÓĞ°´¼ü°´ÏÂÊ±£¬·µ»ØÖµÎª-1£»·ñÔò·µ»Ø°´¼ü  
+		//waitKey(int delay=0)å½“delay â‰¤ 0æ—¶ä¼šæ°¸è¿œç­‰å¾…ï¼›å½“delay>0æ—¶ä¼šç­‰å¾…delayæ¯«ç§’  
+		//å½“æ—¶é—´ç»“æŸå‰æ²¡æœ‰æŒ‰é”®æŒ‰ä¸‹æ—¶ï¼Œè¿”å›å€¼ä¸º-1ï¼›å¦åˆ™è¿”å›æŒ‰é”®  
 		int c = waitKey(delay);  
 		
-		//°´ÏÂESC»òÕßµ½´ïÖ¸¶¨µÄ½áÊøÖ¡ºóÍË³ö¶ÁÈ¡ÊÓÆµ  
+		//æŒ‰ä¸‹ESCæˆ–è€…åˆ°è¾¾æŒ‡å®šçš„ç»“æŸå¸§åé€€å‡ºè¯»å–è§†é¢‘  
 		if((char) c == 27 || currentFrame >= frameToStop)
 		{  
 			stop = true;  
 		}  
-		//°´ÏÂ°´¼üºó»áÍ£ÁôÔÚµ±Ç°Ö¡£¬µÈ´ıÏÂÒ»´Î°´¼ü  
+		//æŒ‰ä¸‹æŒ‰é”®åä¼šåœç•™åœ¨å½“å‰å¸§ï¼Œç­‰å¾…ä¸‹ä¸€æ¬¡æŒ‰é”®  
 		if( c >= 0)  
 		{  
 			waitKey(0);  
 		}
 
-		//¶ÁÈ¡ÏÂÒ»Ö¡  
+		//è¯»å–ä¸‹ä¸€å¸§  
 		if(!capture.read(frame))  
 		{  
-			cout<<"¶ÁÈ¡ÊÓÆµÊ§°Ü"<<endl;  
+			cout<<"è¯»å–è§†é¢‘å¤±è´¥"<<endl;  
 			return -1;    
 		}
 		//capture >> frame;
 
 
-		//ÕâÀï¼ÓÂË²¨³ÌĞò  
+		//è¿™é‡ŒåŠ æ»¤æ³¢ç¨‹åº  
 		imshow("frame",frame);  
 
-		cout<<"ÕıÔÚ¶ÁÈ¡µÚ"<<currentFrame<<"Ö¡"<<endl;  
+		cout<<"æ­£åœ¨è¯»å–ç¬¬"<<currentFrame<<"å¸§"<<endl;  
 		
 		currentFrame++;  
 
-		/** ½«ÊÓÆµĞ´ÈëÎÄ¼ş */
+		/** å°†è§†é¢‘å†™å…¥æ–‡ä»¶ */
 		//vw << frame;
 		writer.write(frame);
 
-	}  
-	//¹Ø±ÕÊÓÆµÎÄ¼ş  
+	} 
+	cout<<"è§†é¢‘ç»“æŸï¼"<<endl;  
+	//å…³é—­è§†é¢‘æ–‡ä»¶  
 	capture.release();  
 	waitKey(0);  
 	return 0;  
