@@ -180,7 +180,7 @@ void main()
 			{
 				cout<<vSameImgList[iInner]<<" == ";
 			}
-
+			cout<<endl;
 		}
 	}
 
